@@ -1,0 +1,107 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+enum Role {
+  ADMIN
+  PM
+  DEV
+}
+
+enum TaskStatus {
+  TODO
+  IN_PROGRESS
+  IN_REVIEW
+  DONE
+  OVERDUE
+}
+
+enum TaskPriority {
+  LOW
+  MEDIUM
+  HIGH
+  CRITICAL
+}
+
+model User {
+  id           String         @id @default(uuid())
+  email        String         @unique
+  passwordHash String
+  role         Role
+  name         String?
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+
+  managedProjects Project[]     @relation("ProjectManager")
+  assignedTasks   Task[]        @relation("TaskDeveloper")
+  notifications   Notification[]
+  activityLogs    ActivityLog[]
+}
+
+model Client {
+  id        String    @id @default(uuid())
+  name      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+  projects  Project[]
+}
+
+model Project {
+  id          String        @id @default(uuid())
+  name        String
+  clientId    String
+  pmId        String
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  client      Client        @relation(fields: [clientId], references: [id])
+  manager     User          @relation("ProjectManager", fields: [pmId], references: [id])
+  tasks       Task[]
+  activityLogs ActivityLog[]
+}
+
+model Task {
+  id          String        @id @default(uuid())
+  title       String
+  description String?
+  status      TaskStatus    @default(TODO)
+  priority    TaskPriority  @default(MEDIUM)
+  dueDate     DateTime
+  projectId   String
+  developerId String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  project     Project       @relation(fields: [projectId], references: [id])
+  developer   User?         @relation("TaskDeveloper", fields: [developerId], references: [id])
+  activityLogs ActivityLog[]
+}
+
+model ActivityLog {
+  id            String   @id @default(uuid())
+  action        String
+  previousValue String?
+  newValue      String?
+  taskId        String?
+  projectId     String
+  userId        String
+  createdAt     DateTime @default(now())
+
+  task          Task?    @relation(fields: [taskId], references: [id])
+  project       Project  @relation(fields: [projectId], references: [id])
+  user          User     @relation(fields: [userId], references: [id])
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  message   String
+  isRead    Boolean  @default(false)
+  userId    String
+  createdAt DateTime @default(now())
+
+  user      User     @relation(fields: [userId], references: [id])
+}
