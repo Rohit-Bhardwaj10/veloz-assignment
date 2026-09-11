@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import api from '../api';
 import { useAuth } from '../context/AuthContext';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
@@ -21,9 +21,7 @@ export const Login: React.FC = () => {
     setError('');
     setIsLoading(true);
     try {
-      const response = await axios.post('http://localhost:3000/api/auth/login', { email, password }, {
-        withCredentials: true
-      });
+      const response = await api.post('/auth/login', { email, password });
       login(response.data.accessToken, response.data.user);
       navigate('/');
     } catch (err: any) {

@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import axios from 'axios';
 import { jwtDecode } from 'jwt-decode';
 import api from '../api';
 
@@ -39,14 +38,13 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     const silentRefresh = async () => {
       try {
-        const response = await axios.post('http://localhost:3000/api/auth/refresh', {}, { withCredentials: true });
+        const response = await api.post('/auth/refresh', {});
         const newToken = response.data.accessToken;
         const decoded: any = jwtDecode(newToken);
         setToken(newToken);
         // Fetch full user info
-        const userRes = await axios.get('http://localhost:3000/api/meta/users', {
+        const userRes = await api.get('/meta/users', {
           headers: { Authorization: `Bearer ${newToken}` },
-          withCredentials: true,
         });
         const fullUser = userRes.data.find((u: User) => u.id === decoded.id);
         setUser(fullUser || { id: decoded.id, role: decoded.role, email: '' });
@@ -66,7 +64,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const logout = async () => {
     try {
-      await axios.post('http://localhost:3000/api/auth/logout', {}, { withCredentials: true });
+      await api.post('/auth/logout', {});
     } catch {}
     setToken(null);
     setUser(null);
