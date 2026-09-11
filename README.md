@@ -18,11 +18,24 @@ Built with a premium monochromatic dark mode aesthetic using **shadcn/ui** and *
 
 ## Local Setup
 
-### Prerequisites
+### 1. Docker Setup (Recommended)
+
+The easiest way to run the application locally is using Docker Compose.
+
+```bash
+git clone https://github.com/your-username/client-dash.git
+cd client-dash
+docker-compose up --build
+```
+This will automatically spin up the PostgreSQL database, the Node.js backend on port 3000, and the Vite frontend on port 5173. The database schema will be automatically migrated and seeded.
+
+### 2. Manual Setup (Without Docker)
+
+**Prerequisites:**
 - Node.js 18+
 - PostgreSQL (or a connection string from Neon/Supabase)
 
-### 1. Clone and install
+**Clone the repository:**
 
 ```bash
 git clone https://github.com/your-username/client-dash.git
@@ -134,7 +147,6 @@ Chose node-cron over Bull queue because:
 
 ## Known Limitations
 
-- No Docker Compose file (manual setup required)
 - Socket.io presence count is in-memory — resets on server restart (acceptable for single-instance)
 - Activity log is append-only with no cleanup/pagination beyond last 20 entries per role
 - No email notifications — only in-app

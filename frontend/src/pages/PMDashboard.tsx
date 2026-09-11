@@ -125,8 +125,8 @@ export const PMDashboard: React.FC = () => {
               {stats.tasksByPriority.map((p: any) => (
                 <Badge 
                   key={p.priority} 
-                  variant={priorityVariant[p.priority] || 'secondary'} 
-                  className="px-3 py-1 text-sm font-medium"
+                  variant="outline" 
+                  className={`px-3 py-1 text-sm font-medium ${priorityStyles[p.priority] || priorityStyles.LOW}`}
                 >
                   {p.priority} <span className="ml-2 font-bold opacity-70">{p.count}</span>
                 </Badge>
