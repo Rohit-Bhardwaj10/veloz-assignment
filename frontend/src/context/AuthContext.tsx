@@ -27,10 +27,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const setToken = (token: string | null) => {
     setAccessToken(token);
     if (token) {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
       api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
     } else {
-      delete axios.defaults.headers.common['Authorization'];
       delete api.defaults.headers.common['Authorization'];
     }
   };
