@@ -97,15 +97,15 @@ export const Login: React.FC = () => {
           </form>
         </Card>
 
-        {/* <div className="mt-10 text-center text-sm text-zinc-500 space-y-2">
+         <div className="mt-10 text-center text-sm text-zinc-500 space-y-2">
           <p className="text-zinc-400 font-medium uppercase tracking-wider text-xs">Demo Accounts</p>
           <div className="flex flex-col gap-1 items-center justify-center font-mono text-xs">
-            <span className="bg-zinc-900/50 border border-zinc-800 px-3 py-1 rounded-full">admin@demo.com</span>
-            <span className="bg-zinc-900/50 border border-zinc-800 px-3 py-1 rounded-full">pm@demo.com</span>
-            <span className="bg-zinc-900/50 border border-zinc-800 px-3 py-1 rounded-full">dev@demo.com</span>
+            <span className="bg-zinc-900/50 border border-zinc-800 px-3 py-1 rounded-full">admin@agency.com</span>
+            <span className="bg-zinc-900/50 border border-zinc-800 px-3 py-1 rounded-full">pm1@agency.com</span>
+            <span className="bg-zinc-900/50 border border-zinc-800 px-3 py-1 rounded-full">dev1@agency.com</span>
           </div>
           <p className="pt-2">Password: <span className="font-mono text-zinc-400">password123</span></p>
-        </div> */}
+        </div>
       </div>
     </div>
   );

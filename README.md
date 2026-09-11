@@ -1,13 +1,18 @@
-# AgencyDash — Real-Time Client Project Dashboard
+# ClientDash — Real-Time Agency Project Dashboard
 
-A full-stack internal agency tool for managing client projects, tracking task progress, and monitoring team activity in real time.
+A full-stack internal agency tool for managing client projects, tracking task progress, and monitoring team activity in real time. 
+
+Built with a premium monochromatic dark mode aesthetic using **shadcn/ui** and **Tailwind CSS v4**.
+
 
 ---
 
-## Live Demo
+## Tech Stack
 
-- **Frontend**: [Deployed on Vercel]  
-- **Backend API**: [Deployed on Render]
+- **Frontend**: React 18, Vite, TypeScript, Tailwind CSS v4, shadcn/ui, Socket.io-client, React Router v6
+- **Backend**: Node.js, Express, TypeScript, Socket.io, Node-cron
+- **Database**: PostgreSQL, Prisma ORM
+- **Authentication**: JWT (Access Tokens in memory, Refresh Tokens in HttpOnly cookies)
 
 ---
 
